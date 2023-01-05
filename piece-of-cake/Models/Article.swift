@@ -6,3 +6,15 @@
 //
 
 import Foundation
+
+struct ArticleList: Decodable {
+    let articles: [Article]
+}
+
+struct Article: Decodable {
+    let author: String?
+    let title: String?
+    let urlToImage: String?
+    let publishedAt: String?
+    let content: String?
+}

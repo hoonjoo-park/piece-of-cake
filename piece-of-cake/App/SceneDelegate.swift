@@ -18,7 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         
-        let rootVC = ArticleListVC()
+        let rootVC = ArticleListTableVC()
         let navVC = UINavigationController(rootViewController: rootVC)
         
         window?.rootViewController = navVC
