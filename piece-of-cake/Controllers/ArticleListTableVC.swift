@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ArticleListVC: UIViewController {
+class ArticleListVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
     }
 
 

@@ -9,19 +9,31 @@
 /* Begin PBXBuildFile section */
 		CB29DDA3296729D2005391CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB29DDA2296729D2005391CE /* AppDelegate.swift */; };
 		CB29DDA5296729D2005391CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB29DDA4296729D2005391CE /* SceneDelegate.swift */; };
-		CB29DDA7296729D2005391CE /* ArticleListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB29DDA6296729D2005391CE /* ArticleListVC.swift */; };
+		CB29DDA7296729D2005391CE /* ArticleListTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB29DDA6296729D2005391CE /* ArticleListTableVC.swift */; };
 		CB29DDAC296729D4005391CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB29DDAB296729D4005391CE /* Assets.xcassets */; };
 		CB29DDAF296729D4005391CE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB29DDAD296729D4005391CE /* LaunchScreen.storyboard */; };
+		CB29DDBB29672DE8005391CE /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB29DDBA29672DE8005391CE /* WebService.swift */; };
+		CB29DDBD29672E05005391CE /* Article.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB29DDBC29672E05005391CE /* Article.swift */; };
+		CB29DDC029672E39005391CE /* ArticleListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB29DDBF29672E39005391CE /* ArticleListTableViewCell.swift */; };
+		CB29DDC229672E5D005391CE /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB29DDC129672E5D005391CE /* TitleLabel.swift */; };
+		CB29DDC429672E69005391CE /* BodyLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB29DDC329672E69005391CE /* BodyLabel.swift */; };
+		CB29DDC629672E97005391CE /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB29DDC529672E97005391CE /* ArticleViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CB29DD9F296729D2005391CE /* piece-of-cake.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "piece-of-cake.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB29DDA2296729D2005391CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CB29DDA4296729D2005391CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CB29DDA6296729D2005391CE /* ArticleListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListVC.swift; sourceTree = "<group>"; };
+		CB29DDA6296729D2005391CE /* ArticleListTableVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListTableVC.swift; sourceTree = "<group>"; };
 		CB29DDAB296729D4005391CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CB29DDAE296729D4005391CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CB29DDB0296729D4005391CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CB29DDBA29672DE8005391CE /* WebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
+		CB29DDBC29672E05005391CE /* Article.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Article.swift; sourceTree = "<group>"; };
+		CB29DDBF29672E39005391CE /* ArticleListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListTableViewCell.swift; sourceTree = "<group>"; };
+		CB29DDC129672E5D005391CE /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		CB29DDC329672E69005391CE /* BodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyLabel.swift; sourceTree = "<group>"; };
+		CB29DDC529672E97005391CE /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,14 +66,68 @@
 		CB29DDA1296729D2005391CE /* piece-of-cake */ = {
 			isa = PBXGroup;
 			children = (
+				CB29DDC729672EA2005391CE /* App */,
+				CB29DDBE29672E16005391CE /* Views */,
+				CB29DDB929672DC5005391CE /* Controllers */,
+				CB29DDB829672D97005391CE /* Services */,
+				CB29DDB729672D8F005391CE /* ViewModels */,
+				CB29DDB629672D87005391CE /* Models */,
+			);
+			path = "piece-of-cake";
+			sourceTree = "<group>";
+		};
+		CB29DDB629672D87005391CE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CB29DDBC29672E05005391CE /* Article.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CB29DDB729672D8F005391CE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CB29DDC529672E97005391CE /* ArticleViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		CB29DDB829672D97005391CE /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CB29DDBA29672DE8005391CE /* WebService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CB29DDB929672DC5005391CE /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CB29DDA6296729D2005391CE /* ArticleListTableVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CB29DDBE29672E16005391CE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CB29DDBF29672E39005391CE /* ArticleListTableViewCell.swift */,
+				CB29DDC129672E5D005391CE /* TitleLabel.swift */,
+				CB29DDC329672E69005391CE /* BodyLabel.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CB29DDC729672EA2005391CE /* App */ = {
+			isa = PBXGroup;
+			children = (
 				CB29DDA2296729D2005391CE /* AppDelegate.swift */,
 				CB29DDA4296729D2005391CE /* SceneDelegate.swift */,
-				CB29DDA6296729D2005391CE /* ArticleListVC.swift */,
 				CB29DDAB296729D4005391CE /* Assets.xcassets */,
 				CB29DDAD296729D4005391CE /* LaunchScreen.storyboard */,
 				CB29DDB0296729D4005391CE /* Info.plist */,
 			);
-			path = "piece-of-cake";
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,9 +200,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB29DDA7296729D2005391CE /* ArticleListVC.swift in Sources */,
+				CB29DDC429672E69005391CE /* BodyLabel.swift in Sources */,
+				CB29DDA7296729D2005391CE /* ArticleListTableVC.swift in Sources */,
 				CB29DDA3296729D2005391CE /* AppDelegate.swift in Sources */,
+				CB29DDC029672E39005391CE /* ArticleListTableViewCell.swift in Sources */,
+				CB29DDBB29672DE8005391CE /* WebService.swift in Sources */,
+				CB29DDC229672E5D005391CE /* TitleLabel.swift in Sources */,
+				CB29DDC629672E97005391CE /* ArticleViewModel.swift in Sources */,
 				CB29DDA5296729D2005391CE /* SceneDelegate.swift in Sources */,
+				CB29DDBD29672E05005391CE /* Article.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +349,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TQX48B3375;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "piece-of-cake/Info.plist";
+				INFOPLIST_FILE = "piece-of-cake/App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
@@ -308,7 +380,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = TQX48B3375;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "piece-of-cake/Info.plist";
+				INFOPLIST_FILE = "piece-of-cake/App/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
