@@ -37,8 +37,9 @@ class ArticleListTableVC: UITableViewController {
     
     
     private func configureTableVC() {
-        self.title = "Piece of Cake"
-        self.navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Piece of Cake"
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .black
         
         tableView.frame = view.bounds
