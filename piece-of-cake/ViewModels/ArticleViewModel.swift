@@ -11,9 +11,27 @@ struct ArticleListViewModel {
     let articles: [Article]
 }
 
-struct ArticleViewModel {
-    private let article: Article
+
+extension ArticleListViewModel {
+    var numberOfSections: Int { return 1 }
+    
+    
+    func numberOfRowsInSection(_ section: Int) -> Int {
+        return self.articles.count
+    }
+    
+    
+    func cellForRowAt(_ index: Int) -> ArticleViewModel {
+        let article = self.articles[index]
+        return ArticleViewModel(article)
+    }
 }
+
+
+struct ArticleViewModel {
+    let article: Article
+}
+
 
 extension ArticleViewModel {
     init(_ article: Article) {
