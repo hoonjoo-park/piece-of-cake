@@ -37,7 +37,7 @@ class ArticleListTableVC: UITableViewController {
     
     
     private func configureTableVC() {
-        title = "Piece of Cake"
+        title = "Piece of Cakes"
         navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
         navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .black
@@ -72,6 +72,11 @@ class ArticleListTableVC: UITableViewController {
         cell.publishedAt.text = articleVM.article.publishedAt ?? "Unknown"
 
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let destinationVC =  ArticleVC()
+        navigationController?.pushViewController(destinationVC, animated: true)
     }
 }
 
