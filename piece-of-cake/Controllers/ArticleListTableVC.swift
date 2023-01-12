@@ -18,6 +18,14 @@ class ArticleListTableVC: UITableViewController {
         configureTableVC()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        title = "Piece of Cakes"
+        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
     private func configureViewModel() {
         Task {
             do {
@@ -37,9 +45,6 @@ class ArticleListTableVC: UITableViewController {
     
     
     private func configureTableVC() {
-        title = "Piece of Cakes"
-        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.prefersLargeTitles = true
         view.backgroundColor = .black
         
         tableView.frame = view.bounds
@@ -65,17 +70,27 @@ class ArticleListTableVC: UITableViewController {
             fatalError("ArticleList Cell Not Found...")
         }
         let articleVM = self.articleListVM.cellForRowAt(indexPath.row)
+        let article = articleVM.article
         
-        cell.thumbnail.downloadImage(url: articleVM.article.urlToImage ?? "")
-        cell.title.text = articleVM.article.title ?? ""
-        cell.author.text = articleVM.article.author ?? "익명"
-        cell.publishedAt.text = articleVM.article.publishedAt ?? "Unknown"
+        cell.thumbnail.downloadImage(url: article.urlToImage ?? "")
+        cell.title.text = article.title ?? ""
+        cell.author.text = article.author ?? "John Doe"
+        cell.publishedAt.text = article.publishedAt ?? "Unknown"
 
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destinationVC =  ArticleVC()
+        let article = self.articleListVM.articles[indexPath.row]
+        
+        destinationVC.articleVM = ArticleViewModel(article: article)
+        destinationVC.bannerImage.downloadImage(url: article.urlToImage ?? "")
+        destinationVC.titleLabel.text = article.title ?? ""
+        destinationVC.authorLabel.text = article.author ?? "John Doe"
+        destinationVC.publishedAtLabel.text = article.publishedAt ?? "Unknown"
+        destinationVC.contentLabel.text = article.content ?? "Content Not Available..."
+        
         navigationController?.pushViewController(destinationVC, animated: true)
     }
 }

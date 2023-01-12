@@ -10,7 +10,7 @@ import UIKit
 class WebService {
     static let shared = WebService()
     
-    private let baseUrl = "https://newsapi.org/v2/top-headlines?country=kr&category=business&apiKey=2be128801b9046e59e727d741e86f924"
+    private let baseUrl = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=2be128801b9046e59e727d741e86f924"
     let decoder = JSONDecoder()
     let cache = NSCache<NSString, UIImage>()
     
