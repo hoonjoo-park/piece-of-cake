@@ -26,6 +26,7 @@ class BodyLabel: UILabel {
         self.font = UIFont.systemFont(ofSize: fontSize, weight: .bold)
         self.textAlignment = textAlign
         self.textColor = color ?? UIColor.white
+        self.numberOfLines = 10
         
         configure()
     }

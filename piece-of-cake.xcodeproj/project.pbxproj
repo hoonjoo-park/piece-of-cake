@@ -378,6 +378,7 @@
 				DEVELOPMENT_TEAM = TQX48B3375;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "piece-of-cake/App/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "피스오브케이크";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
@@ -409,6 +410,7 @@
 				DEVELOPMENT_TEAM = TQX48B3375;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "piece-of-cake/App/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "피스오브케이크";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;

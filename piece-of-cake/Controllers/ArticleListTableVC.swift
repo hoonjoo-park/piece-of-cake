@@ -87,7 +87,7 @@ class ArticleListTableVC: UITableViewController {
         destinationVC.bannerImage.downloadImage(url: article.urlToImage ?? "")
         destinationVC.titleLabel.text = article.title ?? "N/A"
         destinationVC.authorLabel.text = article.author ?? "John Doe"
-        destinationVC.contentLabel.text = article.content ?? "Content Not Available..."
+        destinationVC.contentLabel.text = article.content != nil ? String(article.content!.prefix(199)) : "Content Not Available..."
         destinationVC.publishedAtLabel.text = article.publishedAt != nil ? String(article.publishedAt!.prefix(10)) : "N/A"
         
         navigationController?.pushViewController(destinationVC, animated: true)
