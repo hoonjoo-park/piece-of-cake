@@ -23,6 +23,7 @@
 		CB5EB9FA29707137009F99F0 /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5EB9F929707137009F99F0 /* ArticleViewModel.swift */; };
 		CB5EB9FC29707405009F99F0 /* BannerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5EB9FB29707405009F99F0 /* BannerImage.swift */; };
 		CB99A984296DB50400DF3834 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB99A983296DB50400DF3834 /* Thumbnail.swift */; };
+		CBE239B92972D15B00AB6949 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE239B82972D15B00AB6949 /* LinkButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		CB5EB9F929707137009F99F0 /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		CB5EB9FB29707405009F99F0 /* BannerImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerImage.swift; sourceTree = "<group>"; };
 		CB99A983296DB50400DF3834 /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
+		CBE239B82972D15B00AB6949 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,6 +131,7 @@
 				CB29DDC329672E69005391CE /* BodyLabel.swift */,
 				CB99A983296DB50400DF3834 /* Thumbnail.swift */,
 				CB5EB9FB29707405009F99F0 /* BannerImage.swift */,
+				CBE239B82972D15B00AB6949 /* LinkButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				CB577434296F2C6D00746A73 /* ArticleVC.swift in Sources */,
 				CB29DDA5296729D2005391CE /* SceneDelegate.swift in Sources */,
 				CB29DDCA29673790005391CE /* ErrorMessages.swift in Sources */,
+				CBE239B92972D15B00AB6949 /* LinkButton.swift in Sources */,
 				CB29DDBD29672E05005391CE /* Article.swift in Sources */,
 				CB99A984296DB50400DF3834 /* Thumbnail.swift in Sources */,
 			);

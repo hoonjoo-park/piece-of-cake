@@ -47,6 +47,7 @@ class ArticleListTableViewCell: UITableViewCell {
     private func configureUI() {
         backgroundColor = .black
         [thumbnail, title, publishedAt, author].forEach { addSubview($0) }
+        author.numberOfLines = 1
         
         NSLayoutConstraint.activate([
             thumbnail.widthAnchor.constraint(equalToConstant: 80),

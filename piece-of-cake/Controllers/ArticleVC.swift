@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class ArticleVC: UIViewController {
     
@@ -16,11 +17,14 @@ class ArticleVC: UIViewController {
     let authorLabel = BodyLabel(fontSize: 14, textAlign: .justified, color: .lightGray)
     let publishedAtLabel = BodyLabel(fontSize: 14, textAlign: .justified, color: .lightGray)
     let contentLabel = BodyLabel(fontSize: 18, textAlign: .justified, color: .white)
+    let urlButton = LinkButton()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureUI()
+        configureURLButton()
     }
     
     
@@ -32,7 +36,7 @@ class ArticleVC: UIViewController {
     }
     
     private func configureUI() {
-        let views = [bannerImage, titleLabel, authorLabel, publishedAtLabel, contentLabel]
+        let views = [bannerImage, titleLabel, authorLabel, publishedAtLabel, contentLabel, urlButton]
         let padding: CGFloat = 17
         let screenSize: CGFloat = UIScreen.main.bounds.height
         authorLabel.numberOfLines = 1
@@ -60,6 +64,31 @@ class ArticleVC: UIViewController {
             contentLabel.topAnchor.constraint(equalTo: bannerImage.bottomAnchor, constant: 30),
             contentLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
             contentLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            
+            urlButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding),
+            urlButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+            urlButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+            urlButton.heightAnchor.constraint(equalToConstant: 50),
         ])
+    }
+    
+    
+    private func configureURLButton() {
+        urlButton.addTarget(self, action: #selector(onTappedURLButton), for: .touchUpInside)
+    }
+    
+    
+    @objc func onTappedURLButton() {
+        guard let urlString = articleVM.article.url else { return }
+        
+        if let url =  URL(string: urlString) {
+            let safariVC = SFSafariViewController(url: url)
+            
+            present(safariVC, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Oops!", message: "Sorry... This Link Is Unavailable.", preferredStyle: .alert)
+            
+            present(alert, animated: true)
+        }
     }
 }
