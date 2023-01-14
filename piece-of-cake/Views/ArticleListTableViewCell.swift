@@ -14,8 +14,8 @@ class ArticleListTableViewCell: UITableViewCell {
     
     let thumbnail = Thumbnail(frame: .zero)
     let title = TitleLabel(fontSize: 18, textAlign: .left, color: .white)
-    let publishedAt = BodyLabel(fontSize: 14, textAlign: .center, color: .lightGray)
-    let author = BodyLabel(fontSize: 14, textAlign: .center, color: .lightGray)
+    let publishedAt = BodyLabel(fontSize: 14, textAlign: .left, color: .lightGray)
+    let author = BodyLabel(fontSize: 14, textAlign: .left, color: .lightGray)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -59,6 +59,7 @@ class ArticleListTableViewCell: UITableViewCell {
             title.topAnchor.constraint(equalTo: thumbnail.topAnchor),
             
             author.leadingAnchor.constraint(equalTo: title.leadingAnchor),
+            author.trailingAnchor.constraint(equalTo: title.centerXAnchor),
             author.bottomAnchor.constraint(equalTo: thumbnail.bottomAnchor),
             
             publishedAt.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -18),

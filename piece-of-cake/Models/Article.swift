@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct ArticleList: Decodable {
+struct ArticleList: Codable {
     let articles: [Article]
 }
 
-struct Article: Decodable {
+struct Article: Codable {
     let author: String?
     let title: String?
     let urlToImage: String?

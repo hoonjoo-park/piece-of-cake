@@ -21,8 +21,7 @@ class ArticleListTableVC: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        title = "Piece of Cakes"
-        navigationController?.navigationBar.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+        title = "Piece of Cake"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
@@ -73,9 +72,9 @@ class ArticleListTableVC: UITableViewController {
         let article = articleVM.article
         
         cell.thumbnail.downloadImage(url: article.urlToImage ?? "")
-        cell.title.text = article.title ?? ""
+        cell.title.text = article.title
         cell.author.text = article.author ?? "John Doe"
-        cell.publishedAt.text = article.publishedAt ?? "Unknown"
+        cell.publishedAt.text = article.publishedAt != nil ? String(article.publishedAt!.prefix(10)) : "N/A"
 
         return cell
     }
@@ -86,10 +85,10 @@ class ArticleListTableVC: UITableViewController {
         
         destinationVC.articleVM = ArticleViewModel(article: article)
         destinationVC.bannerImage.downloadImage(url: article.urlToImage ?? "")
-        destinationVC.titleLabel.text = article.title ?? ""
+        destinationVC.titleLabel.text = article.title ?? "N/A"
         destinationVC.authorLabel.text = article.author ?? "John Doe"
-        destinationVC.publishedAtLabel.text = article.publishedAt ?? "Unknown"
         destinationVC.contentLabel.text = article.content ?? "Content Not Available..."
+        destinationVC.publishedAtLabel.text = article.publishedAt != nil ? String(article.publishedAt!.prefix(10)) : "N/A"
         
         navigationController?.pushViewController(destinationVC, animated: true)
     }
