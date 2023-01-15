@@ -22,7 +22,6 @@ class ArticleVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureUI()
         configureURLButton()
     }
@@ -30,7 +29,6 @@ class ArticleVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.topItem?.title = ""
     }
@@ -83,11 +81,9 @@ class ArticleVC: UIViewController {
         
         if let url =  URL(string: urlString) {
             let safariVC = SFSafariViewController(url: url)
-            
             present(safariVC, animated: true)
         } else {
             let alert = UIAlertController(title: "Oops!", message: "Sorry... This Link Is Unavailable.", preferredStyle: .alert)
-            
             present(alert, animated: true)
         }
     }

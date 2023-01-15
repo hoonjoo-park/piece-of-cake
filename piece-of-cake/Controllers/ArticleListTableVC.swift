@@ -103,7 +103,7 @@ class ArticleListTableVC: LoadingVC {
         let scrollViewHeight = scrollView.contentSize.height
         let containerHeight = scrollView.frame.size.height
         
-        if scrolledY + containerHeight + 100 >= scrollViewHeight {
+        if scrolledY + containerHeight + 120 >= scrollViewHeight {
             guard hasNext, !isFetching else { return }
 
             page += 1

@@ -26,7 +26,6 @@ class WebService {
         
         do {
             let articleList = try decoder.decode(ArticleList.self, from: data)
-            
             return articleList
         } catch {
             throw ErrorMessages.InvalidData
