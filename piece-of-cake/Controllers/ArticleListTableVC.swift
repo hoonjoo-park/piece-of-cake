@@ -10,11 +10,15 @@ import UIKit
 class ArticleListTableVC: LoadingVC {
     
     private var articleListVM: ArticleListViewModel!
+    var articles: [Article] = []
+    var page = 1
+    var hasNext = true
+    var isFetching = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        configureViewModel()
+        fetchArticleList()
         configureTableVC()
     }
     
@@ -25,22 +29,26 @@ class ArticleListTableVC: LoadingVC {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    private func configureViewModel() {
+    private func fetchArticleList() {
         showLoadingView()
         
         Task {
             do {
-                let articleList = try await WebService.shared.fetchArticleList()
-                self.articleListVM = ArticleListViewModel(articles: articleList.articles)
+                isFetching = true
+                let articleList = try await WebService.shared.fetchArticleList(page: page)
+                articles.append(contentsOf: articleList.articles)
+                self.articleListVM = ArticleListViewModel(articles: articles)
                 
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
+                if articleList.articles.count >= 20 { hasNext = true }
+                else { hasNext = false }
+                
+                DispatchQueue.main.async { self.tableView.reloadData() }
             }
             catch {
                 if let error = error as? ErrorMessages { print(error) }
             }
             
+            isFetching = false
             hideLoadingView()
         }
     }
@@ -82,6 +90,7 @@ class ArticleListTableVC: LoadingVC {
         return cell
     }
     
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destinationVC =  ArticleVC()
         let article = self.articleListVM.articles[indexPath.row]
@@ -94,6 +103,20 @@ class ArticleListTableVC: LoadingVC {
         destinationVC.publishedAtLabel.text = article.publishedAt != nil ? String(article.publishedAt!.prefix(10)) : "N/A"
         
         navigationController?.pushViewController(destinationVC, animated: true)
+    }
+    
+    
+    override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let scrolledY = scrollView.contentOffset.y
+        let scrollViewHeight = scrollView.contentSize.height
+        let containerHeight = scrollView.frame.size.height
+        
+        if scrolledY + containerHeight + 100 >= scrollViewHeight {
+            guard hasNext, !isFetching else { return }
+
+            page += 1
+            self.fetchArticleList()
+        }
     }
 }
 
