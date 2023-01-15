@@ -11,6 +11,7 @@ class WebService {
     static let shared = WebService()
     
     private let baseUrl = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=2be128801b9046e59e727d741e86f924"
+    
     let decoder = JSONDecoder()
     let cache = NSCache<NSString, UIImage>()
     
@@ -34,7 +35,7 @@ class WebService {
     
     func downloadImage(imageUrl: String) async -> UIImage? {
         let cacheKey = NSString(string: imageUrl)
-        // 이미 캐싱된 이미지가 있으면 바로 리턴
+        // 이미 캐싱된 이미지가 있으면 return
         if let cachedImage = cache.object(forKey: cacheKey) { return cachedImage }
         
         guard let url = URL(string: imageUrl) else { return nil }
