@@ -8,7 +8,7 @@
 import UIKit
 
 class BannerImage: UIImageView {
-    let defaultBannerImage = UIImage(named: "defaultImage")
+    let defaultBannerImage = UIImage(named: "default-image")
     let overlay = UIView()
 
     override init(frame: CGRect) {

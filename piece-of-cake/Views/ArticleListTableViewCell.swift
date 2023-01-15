@@ -12,6 +12,7 @@ class ArticleListTableViewCell: UITableViewCell {
     
     var article: Article!
     
+    let loadingImage = UIImage(named: "loading-image")
     let thumbnail = Thumbnail(frame: .zero)
     let title = TitleLabel(fontSize: 18, textAlign: .left, color: .white)
     let publishedAt = BodyLabel(fontSize: 14, textAlign: .left, color: .lightGray)
@@ -40,11 +41,12 @@ class ArticleListTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        thumbnail.image = UIImage(named: "defaultImage")
+        thumbnail.image = loadingImage
     }
     
     
     private func configureUI() {
+        thumbnail.image = loadingImage
         backgroundColor = .black
         [thumbnail, title, publishedAt, author].forEach { addSubview($0) }
         author.numberOfLines = 1

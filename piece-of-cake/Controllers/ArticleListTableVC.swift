@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ArticleListTableVC: UITableViewController {
+class ArticleListTableVC: LoadingVC {
     
     private var articleListVM: ArticleListViewModel!
 
@@ -26,6 +26,8 @@ class ArticleListTableVC: UITableViewController {
     }
     
     private func configureViewModel() {
+        showLoadingView()
+        
         Task {
             do {
                 let articleList = try await WebService.shared.fetchArticleList()
@@ -39,6 +41,7 @@ class ArticleListTableVC: UITableViewController {
                 if let error = error as? ErrorMessages { print(error) }
             }
             
+            hideLoadingView()
         }
     }
     

@@ -24,6 +24,7 @@
 		CB5EB9FC29707405009F99F0 /* BannerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5EB9FB29707405009F99F0 /* BannerImage.swift */; };
 		CB99A984296DB50400DF3834 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB99A983296DB50400DF3834 /* Thumbnail.swift */; };
 		CBE239B92972D15B00AB6949 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE239B82972D15B00AB6949 /* LinkButton.swift */; };
+		CBE239BB2973EDFD00AB6949 /* LoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE239BA2973EDFD00AB6949 /* LoadingVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		CB5EB9FB29707405009F99F0 /* BannerImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerImage.swift; sourceTree = "<group>"; };
 		CB99A983296DB50400DF3834 /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		CBE239B82972D15B00AB6949 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
+		CBE239BA2973EDFD00AB6949 /* LoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 			children = (
 				CB29DDA6296729D2005391CE /* ArticleListTableVC.swift */,
 				CB577433296F2C6D00746A73 /* ArticleVC.swift */,
+				CBE239BA2973EDFD00AB6949 /* LoadingVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -227,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB29DDC429672E69005391CE /* BodyLabel.swift in Sources */,
+				CBE239BB2973EDFD00AB6949 /* LoadingVC.swift in Sources */,
 				CB29DDA7296729D2005391CE /* ArticleListTableVC.swift in Sources */,
 				CB5EB9FA29707137009F99F0 /* ArticleViewModel.swift in Sources */,
 				CB29DDA3296729D2005391CE /* AppDelegate.swift in Sources */,

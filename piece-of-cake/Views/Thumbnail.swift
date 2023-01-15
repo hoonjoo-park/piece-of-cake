@@ -8,7 +8,7 @@
 import UIKit
 
 class Thumbnail: UIImageView {
-    let defaultThumbnail = UIImage(named: "defaultImage")
+    let defaultThumbnail = UIImage(named: "default-image")
     let cache = WebService.shared.cache
 
     override init(frame: CGRect) {
