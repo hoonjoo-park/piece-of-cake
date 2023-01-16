@@ -81,7 +81,10 @@ class ArticleListTableVC: LoadingVC {
         let articleVM = self.articleListVM.cellForRowAt(indexPath.row)
         let article = articleVM.article
         
-        articleListVM.updateCell(cell: cell, article: article)
+        cell.thumbnail.downloadImage(url: article.urlToImage ?? "")
+        cell.title.text = article.title
+        cell.author.text = article.author ?? "John Doe"
+        cell.publishedAt.text = article.publishedAt != nil ? String(article.publishedAt!.prefix(10)) : "N/A"
 
         return cell
     }
@@ -92,7 +95,11 @@ class ArticleListTableVC: LoadingVC {
         let article = self.articleListVM.articles[indexPath.row]
         let articleVM = ArticleViewModel(article: article)
         
-        articleVM.updateContent(viewController: destinationVC)
+        destinationVC.bannerImage.downloadImage(url: article.urlToImage ?? "")
+        destinationVC.titleLabel.text = article.title ?? "N/A"
+        destinationVC.authorLabel.text = article.author ?? "John Doe"
+        destinationVC.contentLabel.text = article.content != nil ? String(article.content!.prefix(199)) : "Content Not Available..."
+        destinationVC.publishedAtLabel.text = article.publishedAt != nil ? String(article.publishedAt!.prefix(10)) : "N/A"
         
         navigationController?.pushViewController(destinationVC, animated: true)
     }
