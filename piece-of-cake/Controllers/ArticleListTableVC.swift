@@ -10,7 +10,8 @@ import UIKit
 class ArticleListTableVC: LoadingVC {
     
     private var articleListVM: ArticleListViewModel!
-    var articles: [Article] = []
+    private var articleVM: ArticleViewModel!
+
     var page = 1
     var hasNext = true
     var isFetching = false
@@ -35,11 +36,19 @@ class ArticleListTableVC: LoadingVC {
         Task {
             do {
                 isFetching = true
-                let articleList = try await WebService.shared.fetchArticleList(page: page)
-                articles.append(contentsOf: articleList.articles)
-                self.articleListVM = ArticleListViewModel(articles: articles)
+                let articles = try await WebService.shared.fetchArticleList(page: page)
                 
-                if articleList.articles.count >= 20 { hasNext = true }
+                if articleListVM == nil {
+                    articleListVM = ArticleListViewModel(articles)
+                } else {
+                    Observable(articles).subscribe { [weak self] newArticles in
+                        guard let self = self else { return }
+                        
+                        self.articleListVM.articles.value += newArticles
+                    }
+                }
+                
+                if articles.count >= 20 { hasNext = true }
                 else { hasNext = false }
                 
                 DispatchQueue.main.async { self.tableView.reloadData() }
@@ -78,13 +87,14 @@ class ArticleListTableVC: LoadingVC {
             fatalError("ArticleList Cell Not Found...")
         }
         
-        let articleVM = self.articleListVM.cellForRowAt(indexPath.row)
-        let article = articleVM.article
+        articleVM = self.articleListVM.cellForRowAt(indexPath.row)
         
-        cell.thumbnail.downloadImage(url: article.urlToImage ?? "")
-        cell.title.text = article.title
-        cell.author.text = article.author ?? "John Doe"
-        cell.publishedAt.text = article.publishedAt != nil ? String(article.publishedAt!.prefix(10)) : "N/A"
+        articleVM.article.subscribe {
+            cell.thumbnail.downloadImage(url: $0.urlToImage ?? "")
+            cell.title.text = $0.title
+            cell.author.text = $0.author ?? "John Doe"
+            cell.publishedAt.text = $0.publishedAt != nil ? String($0.publishedAt!.prefix(10)) : "N/A"
+        }
 
         return cell
     }
@@ -92,14 +102,9 @@ class ArticleListTableVC: LoadingVC {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destinationVC =  ArticleVC()
-        let article = self.articleListVM.articles[indexPath.row]
-        let articleVM = ArticleViewModel(article: article)
+        let article = self.articleListVM.articles.value[indexPath.row]
         
-        destinationVC.bannerImage.downloadImage(url: article.urlToImage ?? "")
-        destinationVC.titleLabel.text = article.title ?? "N/A"
-        destinationVC.authorLabel.text = article.author ?? "John Doe"
-        destinationVC.contentLabel.text = article.content != nil ? String(article.content!.prefix(199)) : "Content Not Available..."
-        destinationVC.publishedAtLabel.text = article.publishedAt != nil ? String(article.publishedAt!.prefix(10)) : "N/A"
+        destinationVC.articleVM = ArticleViewModel(article)
         
         navigationController?.pushViewController(destinationVC, animated: true)
     }

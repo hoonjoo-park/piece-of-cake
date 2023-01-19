@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 struct ArticleListViewModel {
-    let articles: [Article]
+    let articles: Observable<[Article]>
 }
 
 
@@ -17,13 +17,18 @@ extension ArticleListViewModel {
     var numberOfSections: Int { return 1 }
     
     
+    init(_ articles: [Article]) {
+        self.articles = Observable(articles)
+    }
+    
+    
     func numberOfRowsInSection(_ section: Int) -> Int {
-        return self.articles.count
+        return self.articles.value.count
     }
     
     
     func cellForRowAt(_ index: Int) -> ArticleViewModel {
-        let article = self.articles[index]
+        let article = self.articles.value[index]
         return ArticleViewModel(article)
     }
 }

@@ -8,12 +8,12 @@
 import Foundation
 
 struct ArticleViewModel {
-    let article: Article
+    let article: Observable<Article>
 }
 
 
 extension ArticleViewModel {
     init(_ article: Article) {
-        self.article = article
+        self.article = Observable(article)
     }
 }

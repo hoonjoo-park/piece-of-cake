@@ -18,10 +18,15 @@ class ArticleVC: UIViewController {
     let publishedAtLabel = BodyLabel(fontSize: 14, textAlign: .justified, color: .lightGray)
     let contentLabel = BodyLabel(fontSize: 18, textAlign: .justified, color: .white)
     let urlButton = LinkButton()
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        articleVM.article.subscribe { [weak self] currentArticle in
+            guard let self = self else { return }
+            
+            self.configureData(article: currentArticle)
+        }
         configureUI()
         configureURLButton()
     }
@@ -32,6 +37,16 @@ class ArticleVC: UIViewController {
         self.navigationController?.navigationBar.tintColor = UIColor.white
         self.navigationController?.navigationBar.topItem?.title = ""
     }
+    
+    
+    func configureData(article: Article) {
+        self.bannerImage.downloadImage(url: article.urlToImage ?? "")
+        self.titleLabel.text = article.title ?? "N/A"
+        self.authorLabel.text = article.author ?? "John Doe"
+        self.contentLabel.text = article.content != nil ? String(article.content!.prefix(199)) : "Content Not Available..."
+        self.publishedAtLabel.text = article.publishedAt != nil ? String(article.publishedAt!.prefix(10)) : "N/A"
+    }
+    
     
     private func configureUI() {
         let views = [bannerImage, titleLabel, authorLabel, publishedAtLabel, contentLabel, urlButton]
@@ -77,7 +92,7 @@ class ArticleVC: UIViewController {
     
     
     @objc func onTappedURLButton() {
-        guard let urlString = articleVM.article.url else { return }
+        guard let urlString = articleVM.article.value.url else { return }
         
         if let url =  URL(string: urlString) {
             let safariVC = SFSafariViewController(url: url)

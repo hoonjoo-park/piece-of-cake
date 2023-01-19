@@ -15,7 +15,7 @@ class WebService {
     let decoder = JSONDecoder()
     let cache = NSCache<NSString, UIImage>()
     
-    func fetchArticleList(page: Int) async throws -> ArticleList {
+    func fetchArticleList(page: Int) async throws -> [Article] {
         guard let url = URL(string: baseUrl + "&page=\(page)") else { throw ErrorMessages.InvalidURL }
         
         let (data, response) = try await URLSession.shared.data(from: url)
@@ -26,7 +26,7 @@ class WebService {
         
         do {
             let articleList = try decoder.decode(ArticleList.self, from: data)
-            return articleList
+            return articleList.articles
         } catch {
             throw ErrorMessages.InvalidData
         }
