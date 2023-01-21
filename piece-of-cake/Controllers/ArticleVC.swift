@@ -22,11 +22,12 @@ class ArticleVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         articleVM.article.subscribe { [weak self] currentArticle in
             guard let self = self else { return }
-            
             self.configureData(article: currentArticle)
         }
+        
         configureUI()
         configureURLButton()
     }
@@ -52,10 +53,10 @@ class ArticleVC: UIViewController {
         let views = [bannerImage, titleLabel, authorLabel, publishedAtLabel, contentLabel, urlButton]
         let padding: CGFloat = 17
         let screenSize: CGFloat = UIScreen.main.bounds.height
-        authorLabel.numberOfLines = 1
         
         views.forEach { view.addSubview($0) }
         view.backgroundColor = .black
+        authorLabel.numberOfLines = 1
         
         NSLayoutConstraint.activate([
             bannerImage.topAnchor.constraint(equalTo: view.topAnchor),
