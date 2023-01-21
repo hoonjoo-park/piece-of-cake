@@ -11,6 +11,7 @@ class ArticleListTableVC: LoadingVC {
     
     private var articleListVM: ArticleListViewModel!
     private var articleVM: ArticleViewModel!
+    private let gradient = CAGradientLayer()
 
     var page = 1
     var hasNext = true
@@ -23,12 +24,21 @@ class ArticleListTableVC: LoadingVC {
         configureTableVC()
     }
     
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         title = "Piece of Cake"
         navigationController?.navigationBar.prefersLargeTitles = true
     }
+    
+    
+    private func configureGradient() {
+        gradient.startPoint = CGPoint(x: 0, y: 0.5)
+        gradient.endPoint = CGPoint(x: 1, y: 0.5)
+        view.layer.addSublayer(gradient)
+    }
+    
     
     private func fetchArticleList() {
         showLoadingView()
