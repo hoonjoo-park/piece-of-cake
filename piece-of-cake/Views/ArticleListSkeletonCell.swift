@@ -10,17 +10,17 @@ import UIKit
 class ArticleListSkeletonCell: UITableViewCell {
     static let reuseID = "ArticleListSkeletonCell"
     
-    let thumbnail = Thumbnail(frame: .zero)
-    let title = TitleLabel(fontSize: 18, textAlign: .left, color: .white)
-    let author = BodyLabel(fontSize: 14, textAlign: .left, color: .lightGray)
+    let thumbnail = SkeletonView()
+    let title = SkeletonView()
+    let author = SkeletonView()
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         configureUI()
-        
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -31,29 +31,32 @@ class ArticleListSkeletonCell: UITableViewCell {
         super.awakeFromNib()
     }
     
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-            
-        let subViews = [thumbnail, title, author]
-        let animationGroup = makeSkeletonAnimationGroup()
-        
-        subViews.forEach {
-            let gradient = SkeletonLayer()
-            
-            gradient.frame = $0.bounds
-            gradient.cornerRadius = 10
-            gradient.add(animationGroup, forKey: "backgroundColor")
-            
-            $0.layer.addSublayer(gradient)
-        }
-        
-    }
-    
+
+// MARK: Shimmer 방식 Skeleton Animation
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//
+//        let subViews = [thumbnail, title, author]
+//        let animationGroup = makeSkeletonAnimationGroup()
+//
+//        subViews.forEach {
+//            let gradient = SkeletonLayer()
+//
+//            gradient.frame = $0.bounds
+//            gradient.cornerRadius = 10
+//            gradient.add(animationGroup, forKey: "backgroundColor")
+//
+//            $0.layer.addSublayer(gradient)
+//        }
+//
+//    }
+
     
     private func configureUI() {
         backgroundColor = .black
-        [thumbnail, title, author].forEach { addSubview($0) }
+        [thumbnail, title, author].forEach {
+            addSubview($0)
+        }
         
         NSLayoutConstraint.activate([
             thumbnail.widthAnchor.constraint(equalToConstant: 80),
