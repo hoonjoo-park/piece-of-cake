@@ -23,10 +23,12 @@
 		CB5EB9FA29707137009F99F0 /* ArticleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5EB9F929707137009F99F0 /* ArticleViewModel.swift */; };
 		CB5EB9FC29707405009F99F0 /* BannerImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB5EB9FB29707405009F99F0 /* BannerImage.swift */; };
 		CB6631BC29799AB60017DFF4 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB6631BB29799AB60017DFF4 /* Observable.swift */; };
-		CB787BE3297C438D00658D1C /* SkeletonUIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB787BE2297C438D00658D1C /* SkeletonUIHelper.swift */; };
 		CB787BE5297C43E200658D1C /* UIColor+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB787BE4297C43E200658D1C /* UIColor+Ext.swift */; };
 		CB99A984296DB50400DF3834 /* Thumbnail.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB99A983296DB50400DF3834 /* Thumbnail.swift */; };
 		CBD9BFF12975AA990056ADC8 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBD9BFF02975AA990056ADC8 /* LoadingView.swift */; };
+		CBDE08FE297D45B0002A01B3 /* SkeletonLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDE08FD297D45B0002A01B3 /* SkeletonLayer.swift */; };
+		CBDE0901297D4686002A01B3 /* SkeletonLoadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDE0900297D4686002A01B3 /* SkeletonLoadable.swift */; };
+		CBDE0903297D5457002A01B3 /* ArticleListSkeletonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBDE0902297D5457002A01B3 /* ArticleListSkeletonCell.swift */; };
 		CBE239B92972D15B00AB6949 /* LinkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE239B82972D15B00AB6949 /* LinkButton.swift */; };
 		CBE239BB2973EDFD00AB6949 /* LoadingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = CBE239BA2973EDFD00AB6949 /* LoadingVC.swift */; };
 /* End PBXBuildFile section */
@@ -50,10 +52,12 @@
 		CB5EB9F929707137009F99F0 /* ArticleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleViewModel.swift; sourceTree = "<group>"; };
 		CB5EB9FB29707405009F99F0 /* BannerImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerImage.swift; sourceTree = "<group>"; };
 		CB6631BB29799AB60017DFF4 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
-		CB787BE2297C438D00658D1C /* SkeletonUIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonUIHelper.swift; sourceTree = "<group>"; };
 		CB787BE4297C43E200658D1C /* UIColor+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Ext.swift"; sourceTree = "<group>"; };
 		CB99A983296DB50400DF3834 /* Thumbnail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Thumbnail.swift; sourceTree = "<group>"; };
 		CBD9BFF02975AA990056ADC8 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		CBDE08FD297D45B0002A01B3 /* SkeletonLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonLayer.swift; sourceTree = "<group>"; };
+		CBDE0900297D4686002A01B3 /* SkeletonLoadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkeletonLoadable.swift; sourceTree = "<group>"; };
+		CBDE0902297D5457002A01B3 /* ArticleListSkeletonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArticleListSkeletonCell.swift; sourceTree = "<group>"; };
 		CBE239B82972D15B00AB6949 /* LinkButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkButton.swift; sourceTree = "<group>"; };
 		CBE239BA2973EDFD00AB6949 /* LoadingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +98,7 @@
 				CB29DDB829672D97005391CE /* Services */,
 				CB29DDB729672D8F005391CE /* ViewModels */,
 				CB29DDC82967376B005391CE /* Utils */,
+				CBDE08FF297D4655002A01B3 /* Extension */,
 				CB29DDB629672D87005391CE /* Models */,
 			);
 			path = "piece-of-cake";
@@ -138,12 +143,14 @@
 			isa = PBXGroup;
 			children = (
 				CB29DDBF29672E39005391CE /* ArticleListTableViewCell.swift */,
+				CBDE0902297D5457002A01B3 /* ArticleListSkeletonCell.swift */,
 				CB29DDC129672E5D005391CE /* TitleLabel.swift */,
 				CB29DDC329672E69005391CE /* BodyLabel.swift */,
 				CB99A983296DB50400DF3834 /* Thumbnail.swift */,
 				CB5EB9FB29707405009F99F0 /* BannerImage.swift */,
 				CBE239B82972D15B00AB6949 /* LinkButton.swift */,
 				CBD9BFF02975AA990056ADC8 /* LoadingView.swift */,
+				CBDE08FD297D45B0002A01B3 /* SkeletonLayer.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -165,10 +172,17 @@
 			children = (
 				CB29DDC929673790005391CE /* ErrorMessages.swift */,
 				CB6631BB29799AB60017DFF4 /* Observable.swift */,
-				CB787BE2297C438D00658D1C /* SkeletonUIHelper.swift */,
 				CB787BE4297C43E200658D1C /* UIColor+Ext.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		CBDE08FF297D4655002A01B3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CBDE0900297D4686002A01B3 /* SkeletonLoadable.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,13 +256,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				CB29DDC429672E69005391CE /* BodyLabel.swift in Sources */,
+				CBDE0903297D5457002A01B3 /* ArticleListSkeletonCell.swift in Sources */,
 				CBE239BB2973EDFD00AB6949 /* LoadingVC.swift in Sources */,
 				CB29DDA7296729D2005391CE /* ArticleListTableVC.swift in Sources */,
 				CB5EB9FA29707137009F99F0 /* ArticleViewModel.swift in Sources */,
 				CB6631BC29799AB60017DFF4 /* Observable.swift in Sources */,
 				CB29DDA3296729D2005391CE /* AppDelegate.swift in Sources */,
-				CB787BE3297C438D00658D1C /* SkeletonUIHelper.swift in Sources */,
 				CB29DDC029672E39005391CE /* ArticleListTableViewCell.swift in Sources */,
+				CBDE08FE297D45B0002A01B3 /* SkeletonLayer.swift in Sources */,
 				CB29DDBB29672DE8005391CE /* WebService.swift in Sources */,
 				CB29DDC229672E5D005391CE /* TitleLabel.swift in Sources */,
 				CB5EB9FC29707405009F99F0 /* BannerImage.swift in Sources */,
@@ -260,6 +275,7 @@
 				CB29DDBD29672E05005391CE /* Article.swift in Sources */,
 				CB787BE5297C43E200658D1C /* UIColor+Ext.swift in Sources */,
 				CB99A984296DB50400DF3834 /* Thumbnail.swift in Sources */,
+				CBDE0901297D4686002A01B3 /* SkeletonLoadable.swift in Sources */,
 				CBD9BFF12975AA990056ADC8 /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

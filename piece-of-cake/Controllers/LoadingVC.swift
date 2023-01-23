@@ -10,6 +10,7 @@ import UIKit
 class LoadingVC: UITableViewController {
     var loadingContainer: UIView!
     
+    
     func showLoadingView() {
         loadingContainer = LoadingView(frame: view.bounds)
         view.addSubview(loadingContainer)
@@ -18,8 +19,10 @@ class LoadingVC: UITableViewController {
     
     func hideLoadingView() {
         DispatchQueue.main.async {
-            self.loadingContainer.removeFromSuperview()
-            self.loadingContainer = nil
+            if self.loadingContainer != nil {
+                self.loadingContainer.removeFromSuperview()
+                self.loadingContainer = nil
+            }
         }
     }
 }
