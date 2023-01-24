@@ -7,18 +7,20 @@
 
 import UIKit
 
-class ArticleListTableVC: LoadingVC {
+class ArticleListTableVC: UITableViewController {
     
     private var articleListVM: ArticleListViewModel!
     private var articleVM: ArticleViewModel!
-
+    var selectedIndexPath: IndexPath!
+    
     var page = 1
     var hasNext = true
     var isFetching = false
     var isInitialRender = true
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.delegate = self
         
         configureTableVC()
         fetchArticleList()
@@ -34,8 +36,6 @@ class ArticleListTableVC: LoadingVC {
     
     
     private func fetchArticleList() {
-        if !isInitialRender { showLoadingView() }
-        
         Task {
             do {
                 isFetching = true
@@ -59,8 +59,6 @@ class ArticleListTableVC: LoadingVC {
             
             isFetching = false
             isInitialRender = false
-            
-            hideLoadingView()
         }
     }
     
@@ -92,23 +90,23 @@ class ArticleListTableVC: LoadingVC {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ArticleListSkeletonCell.reuseID, for: indexPath) as? ArticleListSkeletonCell else {
                 fatalError("ArticleList Cell Not Found...")
             }
-
+            
             return cell
-
+            
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: ArticleListTableViewCell.reuseID, for: indexPath) as? ArticleListTableViewCell else {
                 fatalError("ArticleList Cell Not Found...")
             }
-
+            
             articleVM = self.articleListVM.cellForRowAt(indexPath.row)
-
+            
             articleVM.article.subscribe {
                 cell.thumbnail.downloadImage(url: $0.urlToImage ?? "")
                 cell.title.text = $0.title
                 cell.author.text = $0.author ?? "John Doe"
                 cell.publishedAt.text = $0.publishedAt != nil ? String($0.publishedAt!.prefix(10)) : "N/A"
             }
-
+            
             return cell
         }
     }
@@ -117,24 +115,55 @@ class ArticleListTableVC: LoadingVC {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let destinationVC =  ArticleVC()
         let article = self.articleListVM.articles.value[indexPath.row]
-
-        destinationVC.articleVM = ArticleViewModel(article)
-
+        
+        selectedIndexPath = indexPath
+        articleVM = ArticleViewModel(article)
+        destinationVC.articleVM = articleVM
+        
         navigationController?.pushViewController(destinationVC, animated: true)
     }
-
-
+    
+    
     override func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let scrolledY = scrollView.contentOffset.y
         let scrollViewHeight = scrollView.contentSize.height
         let containerHeight = scrollView.frame.size.height
-
+        
         if scrolledY + containerHeight + 120 >= scrollViewHeight {
             guard hasNext, !isFetching else { return }
-
+            
             page += 1
             self.fetchArticleList()
         }
     }
 }
 
+
+extension ArticleListTableVC: ZoomingViewController, UINavigationControllerDelegate {
+    func zoomingImageView(for transition: ZoomTransition) -> UIImageView? {
+        if let indexPath = selectedIndexPath {
+            let cell = tableView?.cellForRow(at: indexPath) as! ArticleListTableViewCell
+            return cell.thumbnail
+        }
+        
+        return nil
+    }
+    
+    func zoomingBackgroundView(for transition: ZoomTransition) -> UIView? {
+        return tableView
+    }
+    
+    func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .push {
+            let transition = ZoomTransition()
+            transition.operation = .push
+            
+            return transition
+        } else {
+            let transition = ZoomTransition()
+            transition.operation = .pop
+            
+            return transition
+        }
+    }
+}

@@ -104,3 +104,15 @@ class ArticleVC: UIViewController {
         }
     }
 }
+
+
+extension ArticleVC: ZoomingViewController {
+    func zoomingImageView(for transition: ZoomTransition) -> UIImageView? {
+        return bannerImage
+    }
+    
+    
+    func zoomingBackgroundView(for transition: ZoomTransition) -> UIView? {
+        return self.view
+    }
+}
