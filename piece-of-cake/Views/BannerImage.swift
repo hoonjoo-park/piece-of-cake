@@ -9,7 +9,7 @@ import UIKit
 
 class BannerImage: UIImageView {
     let defaultBannerImage = UIImage(named: "default-image")
-    let overlay = UIView()
+    var overlay: UIView!
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,26 +22,22 @@ class BannerImage: UIImageView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
-        overlay.translatesAutoresizingMaskIntoConstraints = false
+        contentMode = .scaleAspectFill
+        layer.masksToBounds = true
         
+        overlay = UIView(frame: self.bounds)
+        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.4)
         addSubview(overlay)
-        overlay.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25)
-        
-        NSLayoutConstraint.activate([
-            overlay.leadingAnchor.constraint(equalTo: leadingAnchor),
-            overlay.trailingAnchor.constraint(equalTo: trailingAnchor),
-            overlay.topAnchor.constraint(equalTo: topAnchor),
-            overlay.bottomAnchor.constraint(equalTo: bottomAnchor),
-        ])
-        
     }
     
     
     func downloadImage(url: String?) {
         Task {
             image = await WebService.shared.downloadImage(imageUrl: url ?? "") ?? defaultBannerImage
+            configureUI()
         }
     }
     

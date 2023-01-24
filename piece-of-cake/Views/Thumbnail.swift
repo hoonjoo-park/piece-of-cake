@@ -23,6 +23,8 @@ class Thumbnail: UIImageView {
     
     private func configureUI() {
         translatesAutoresizingMaskIntoConstraints = false
+        contentMode = .scaleAspectFill
+        layer.masksToBounds = true
         layer.cornerRadius = 12
         clipsToBounds = true
     }
