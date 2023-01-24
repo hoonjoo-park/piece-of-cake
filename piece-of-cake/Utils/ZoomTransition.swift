@@ -21,7 +21,7 @@ class ZoomTransition: NSObject, UIViewControllerAnimatedTransitioning {
     var transitionDuration: TimeInterval = 0.5
     var operation: UINavigationController.Operation = .none
     private let zoomScale: CGFloat = 15
-    private let backgroundScale: CGFloat = 0.5
+    private let backgroundScale: CGFloat = 0.8
     
     typealias ZoomingViews = (otherView: UIView, imageView: UIView)
     
@@ -31,6 +31,7 @@ class ZoomTransition: NSObject, UIViewControllerAnimatedTransitioning {
         case .initial:
             backgroundViewController.view.transform = .identity
             backgroundViewController.view.alpha = 1
+            viewsInForeground.otherView.alpha = 0
             
             snapshotViews.imageView.frame = containerView.convert(viewsInBackground.imageView.frame, from: viewsInBackground.imageView.superview)
         case .final:
@@ -67,6 +68,10 @@ class ZoomTransition: NSObject, UIViewControllerAnimatedTransitioning {
         else { return }
         
         let imageViewSnapshot = UIImageView(image: backgroundImageView.image)
+        let overlay = UIView(frame: imageViewSnapshot.bounds)
+        overlay.backgroundColor = UIColor.black.withAlphaComponent(0.4)
+        imageViewSnapshot.addSubview(overlay)
+        
         imageViewSnapshot.contentMode = .scaleAspectFill
         imageViewSnapshot.layer.masksToBounds = true
         imageViewSnapshot.layer.cornerRadius = 10
@@ -109,6 +114,7 @@ class ZoomTransition: NSObject, UIViewControllerAnimatedTransitioning {
             imageViewSnapshot.removeFromSuperview()
             backgroundImageView.isHidden = false
             foregroundImageView.isHidden = false
+            foregroundViewController.view.alpha = 1
             foregroundViewController.view.backgroundColor = foregroundViewBackgroundColor
             
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)

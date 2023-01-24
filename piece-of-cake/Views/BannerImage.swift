@@ -18,6 +18,13 @@ class BannerImage: UIImageView {
     }
     
     
+    override init(image: UIImage?) {
+        super.init(image: image)
+        
+        configureUI()
+    }
+    
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
