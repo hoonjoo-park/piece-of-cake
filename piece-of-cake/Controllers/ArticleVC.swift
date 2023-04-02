@@ -1,10 +1,3 @@
-//
-//  ArticleVC.swift
-//  piece-of-cake
-//
-//  Created by Hoonjoo Park on 2023/01/12.
-//
-
 import UIKit
 import SafariServices
 

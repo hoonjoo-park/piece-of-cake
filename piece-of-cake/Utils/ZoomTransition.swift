@@ -1,21 +1,16 @@
-//
-//  ZoomTransition.swift
-//  piece-of-cake
-//
-//  Created by Hoonjoo Park on 2023/01/24.
-//
-
 import UIKit
 
-protocol ZoomingViewController {
+protocol ZoomingViewController: AnyObject {
     func zoomingImageView(for transition: ZoomTransition) -> UIImageView?
     func zoomingBackgroundView(for transition: ZoomTransition) -> UIView?
 }
 
+
 enum TransitionState {
-    case initial
-    case final
+    case start
+    case finish
 }
+
 
 class ZoomTransition: NSObject, UIViewControllerAnimatedTransitioning {
     var transitionDuration: TimeInterval = 0.5
@@ -28,13 +23,13 @@ class ZoomTransition: NSObject, UIViewControllerAnimatedTransitioning {
     
     func configureViews(for state: TransitionState, containerView: UIView, backgroundViewController: UIViewController, viewsInBackground: ZoomingViews, viewsInForeground: ZoomingViews, snapshotViews: ZoomingViews) {
         switch state {
-        case .initial:
+        case .start:
             backgroundViewController.view.transform = .identity
             backgroundViewController.view.alpha = 1
             viewsInForeground.otherView.alpha = 0
             
             snapshotViews.imageView.frame = containerView.convert(viewsInBackground.imageView.frame, from: viewsInBackground.imageView.superview)
-        case .final:
+        case .finish:
             backgroundViewController.view.transform = CGAffineTransform(scaleX: backgroundScale, y: backgroundScale)
             backgroundViewController.view.alpha = 0
             
@@ -43,9 +38,11 @@ class ZoomTransition: NSObject, UIViewControllerAnimatedTransitioning {
         }
     }
     
+    
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return transitionDuration
     }
+    
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let duration = transitionDuration(using: transitionContext)
@@ -90,14 +87,14 @@ class ZoomTransition: NSObject, UIViewControllerAnimatedTransitioning {
         containerView.addSubview(foregroundViewController.view)
         containerView.addSubview(imageViewSnapshot)
         
-        var preTransitionState = TransitionState.initial
-        var postTransitionState = TransitionState.final
+        var preTransitionState = TransitionState.start
+        var postTransitionState = TransitionState.finish
         
         if operation == .pop {
             foregroundViewController.view.alpha = 0
             
-            preTransitionState = .final
-            postTransitionState = .initial
+            preTransitionState = .finish
+            postTransitionState = .start
         }
         
         configureViews(for: preTransitionState, containerView: containerView, backgroundViewController: backgroundViewController, viewsInBackground: (backgroundView, backgroundImageView), viewsInForeground: (foregroundView, foregroundImageView), snapshotViews: (backgroundViewSnapshot, imageViewSnapshot))
@@ -125,11 +122,13 @@ class ZoomTransition: NSObject, UIViewControllerAnimatedTransitioning {
 
 extension ZoomTransition : UINavigationControllerDelegate {
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        
         guard fromVC is ZoomingViewController && toVC is ZoomingViewController else {
             return nil
         }
         
         self.operation = operation
+        
         return self
     }
 }

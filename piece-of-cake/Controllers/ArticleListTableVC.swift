@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  piece-of-cake
-//
-//  Created by Hoonjoo Park on 2023/01/06.
-//
-
 import UIKit
 
 class ArticleListTableVC: UITableViewController {
@@ -149,18 +142,20 @@ extension ArticleListTableVC: ZoomingViewController, UINavigationControllerDeleg
         return nil
     }
     
+    
     func zoomingBackgroundView(for transition: ZoomTransition) -> UIView? {
         return tableView
     }
     
+    
     func navigationController(_ navigationController: UINavigationController, animationControllerFor operation: UINavigationController.Operation, from fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let transition = ZoomTransition()
+        
         if operation == .push {
-            let transition = ZoomTransition()
             transition.operation = .push
             
             return transition
         } else {
-            let transition = ZoomTransition()
             transition.operation = .pop
             
             return transition
